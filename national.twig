@@ -1,0 +1,44 @@
+{% set stock_image = [
+    { desktop: "https://cdn.salla.sa/form-builder/Nv8TKMYOCOf3a2fkmuUd5SoFUFmwG6zpbqb7P6Pt.png", moble: "https://cdn.salla.sa/form-builder/TKyLfjMaVVq4jQiJVtttGkELKvtNDJw0ibS6pyBy.png" },
+    { desktop: "https://cdn.salla.sa/form-builder/vPX16T7ruXpPVpDMIBTmJaL1iVp8G5jFEYsyeK9h.png", moble: "https://cdn.salla.sa/form-builder/p9cNbbo5xqsHtK6r9Oo1KrxhcMq0Pahamu0QilHQ.png" },
+    { desktop: "https://cdn.salla.sa/form-builder/kDiW2jBAc8GAqWhsXD0RSBkZeREUBUu4MA6BnfnJ.png", moble: "https://cdn.salla.sa/form-builder/eCB3W76CZsbDtAGxLQu7lIx2nQaDUA8B8rgpZ01h.png" },
+    { desktop: "https://cdn.salla.sa/form-builder/URyhSCcKJ8NByQDhNMnxHdgYVmQuoWfyOt1DGogM.png", moble: "https://cdn.salla.sa/form-builder/RNh0zMUfJ23S3uMhDMnM2zrbTMSyMF8nlvt5u8MR.png" },
+    { desktop: "https://cdn.salla.sa/form-builder/xryWy90doj7rikNwilE4B5ZzZs66Ub9IaYTd3Ykn.png", moble: "https://cdn.salla.sa/form-builder/QTGqsHMvUkUSyRYdTn5faULXAi0BZa6HONMkpHBF.png" },
+    { desktop: "https://cdn.salla.sa/form-builder/1mjsBjdouV8zGw0phBBBIjLWyHcqfFHImYM0NpJX.png", moble: "https://cdn.salla.sa/form-builder/3AczHfVpMdq8tCdYORZnobm0s18MJHJ0ojpJ68qE.png" }
+] %}
+
+{% set banners = {"one_banner": 0, "tow_banner": 1, "three_banner": 2, "four_banner": 3, "five_banner": 4} %}
+<section class="w-full mb-6 md:mb-12">
+	<div class="w-full relative">
+		{% set index = banners[component.nationalday] is defined ? banners[component.nationalday] : 5 %}
+
+		{% if component.has_vedio_national %}
+			<video width="100%" height="100%" autoplay muted class="md:hidden block">
+				<source src="https://a.top4top.io/m_3182o8d041.mp4" type="video/mp4">
+			</video>
+			<video width="100%" height="100%" autoplay muted class="md:block hidden">
+				<source src="https://k.top4top.io/m_3182tv4y11.mp4" type="video/mp4">
+			</video>
+		{% else %}
+			<img src="{{ stock_image[index].desktop }}" alt="" class="md:block hidden" width="100%" height="100%">
+			<img src="{{ stock_image[index].moble }}" alt="" class="md:hidden block" width="100%" height="100%">
+		{% endif %}
+		<div class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-full {{ component.has_vedio_national ? 'top-1/2 flex h-full md:top-1/4' : 'top-1/3 md:top-1/4' }}">
+			<div class="w-full flex items-center {{ component.has_vedio_national ? 'justify-between md:justify-evenly' : 'justify-evenly' }} md:flex-row flex-col mx-1 gap-14">
+				<div class="log_national center-between w-[90%] md:w-auto mx-auto md:mx-0">
+					<img src="https://cdn.salla.sa/form-builder/JVl7tXcKfqzTXvqn1o8IC7lPU5znzFh8J17VOVXj.png" alt="" class="w-full object-cover">
+					<img src="{{ component.imgaddlogo }}" alt="" class="w-full object-cover md:hidden block">
+				</div>
+				<div class="center-between flex-col gap-4 {{ component.has_vedio_national ? 'text-cyan-600 md:text-white' : 'text-white' }} text-center w-[95%] md:w-max md:mx-0 mx-auto">
+					<h2 class="text-2xl md:text-3xl lg:text-5xl font-bold md:!leading-20">{{ component.title_national }}</h2>
+					{% if not component.has_vedio_national %}
+						<p class="font-normal text-base md:text-lg lg:text-2xl">{{ component.sub_national }}</p>
+					{% endif %}
+				</div>
+				<div class="log_national md:block hidden">
+					<img src="{{ component.imgaddlogo }}" alt="" class="w-full object-cover">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
